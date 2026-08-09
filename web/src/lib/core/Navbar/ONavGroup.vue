@@ -102,6 +102,7 @@ const gateContext = computed<NavGateContext>(() => {
     modelPricing: !!z.model_pricing_enabled,
     serviceStreams: z.service_streams_enabled !== false,
     onlineEvals: !!z.online_evals_enabled,
+    databaseMonitoring: !!z.database_monitoring_enabled,
     // Raw split (no trim) to match how pages test custom_hide_menus.
     hiddenMenus: new Set((z.custom_hide_menus ?? "").split(",")),
   };
@@ -191,6 +192,13 @@ const activeChild = computed<SubnavChild | null>(() => {
       c.activeOnTab && route.name === c.activeOnTab.name && route.query.tab === c.activeOnTab.tab,
   );
   if (tabAlias) return tabAlias;
+
+  // A route alias, same idea for a section whose sub-views are sibling ROUTES
+  // rendered as in-page tabs (Databases owns dbmQueries / dbmQueryDetail).
+  // Checked before the prefix pass below, which would otherwise attribute a
+  // detail route to whichever child has the longest matching path.
+  const routeAlias = props.children.find((c) => c.activeOnRoutes?.includes(route.name as string));
+  if (routeAlias) return routeAlias;
 
   const exact = props.children.find(
     (c) => route.name === c.name && (!c.tab || route.query.tab === c.tab),

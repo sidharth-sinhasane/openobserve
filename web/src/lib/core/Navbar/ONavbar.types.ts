@@ -65,6 +65,14 @@ export interface SubnavChild {
    * looking at, matching every other submenu's behavior.
    */
   activeOnTab?: { name: string; tab: string };
+  /**
+   * Also mark this child active on these route names. Symmetric with
+   * `activeOnTab`, for a section whose sub-views are IN-PAGE TABS on sibling
+   * routes rather than query params: Databases owns `dbmQueries` and
+   * `dbmQueryDetail`, which have no flyout entry of their own, so without this
+   * the entry unlights the moment the user switches tab.
+   */
+  activeOnRoutes?: string[];
   /** Group children only: include only when this top-level item is present. */
   requires?: string;
   /**
@@ -87,6 +95,8 @@ export interface NavGateContext {
   modelPricing: boolean;
   serviceStreams: boolean;
   onlineEvals: boolean;
+  /** `zoConfig.database_monitoring_enabled`. OSS feature — no build gate. */
+  databaseMonitoring: boolean;
   /** Raw `custom_hide_menus` entries (split on ",") — matches how pages test it. */
   hiddenMenus: Set<string>;
 }
