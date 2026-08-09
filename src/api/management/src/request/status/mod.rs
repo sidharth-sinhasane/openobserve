@@ -214,6 +214,10 @@ struct ConfigResponse<'a> {
     /// (`O2_SYNTHETICS_RECORDER_EXTENSION_URL`) — the browser-test setup UI
     /// links its install button here.
     synthetics_recorder_extension_url: String,
+    /// Database Monitoring (`ZO_DB_MONITORING_ENABLED`). Plain OSS flag — no
+    /// enterprise gating (design §8): menu/route gating in the UI checks this
+    /// flag alone, without an `isEnterprise` conjunct.
+    database_monitoring_enabled: bool,
     enable_cross_linking: bool,
     show_fts_field_values: bool,
     search_inspector_enabled: bool,
@@ -491,6 +495,7 @@ pub async fn zo_config() -> impl IntoResponse {
         anomaly_detection_enabled,
         synthetics_enabled,
         synthetics_recorder_extension_url: synthetics_recorder_extension_url.to_string(),
+        database_monitoring_enabled: cfg.db_monitoring.enabled,
         enable_cross_linking: cfg.common.enable_cross_linking,
         show_fts_field_values: cfg.common.show_fts_field_values,
         search_inspector_enabled: cfg.common.search_inspector_enabled,
