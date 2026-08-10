@@ -8179,7 +8179,11 @@
       "backendLabel": "Backend:",
       "viewTraceDetails": "View Trace Details",
       "backendTraceNotAvailable": "Backend trace data not yet available. Trace data may take up to 30 seconds to be ingested."
-    }
+    },
+    "spanEventTimeline": "Span event timeline",
+    "eventMarkerTooltip": "Event: {name}",
+    "exceptionMarkerTooltip": "Exception: {type}",
+    "spanEventFallback": "span event"
   },
   "actions": {
     "realTime": "Real Time",
