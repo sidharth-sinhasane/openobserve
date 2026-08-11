@@ -26,6 +26,7 @@ import type { CardSubstitutions, RichCardContent } from "./types";
 import sqlServer from "./content/sqlServer";
 import postgres from "./content/postgres";
 import mysql from "./content/mysql";
+import mariadb from "./content/mariadb";
 import mongodb from "./content/mongodb";
 import redis from "./content/redis";
 import oracle from "./content/oracle";
@@ -49,6 +50,7 @@ const registry: Record<string, DataSourceCardBuilder> = {
   sqlServer,
   postgres,
   mySQL: mysql,
+  mariaDB: mariadb,
   mongoDB: mongodb,
   redis,
   oracle,
