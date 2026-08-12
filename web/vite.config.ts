@@ -153,6 +153,11 @@ const datasourceContentPlugin = {
 export default defineConfig(({ mode }) => {
   const isProd = mode === "production";
 
+  // Where the dev server proxies `/api`, `/auth` and `/config`. Local by
+  // default; point it elsewhere with O2_DEV_BACKEND. Dev-server only — it has
+  // no effect on a built bundle, which is served by the backend itself.
+  const devBackend = process.env.O2_DEV_BACKEND ?? "http://localhost:5080";
+
   // Feature-group logging: console.log/debug/info('<namespace>', ...) calls
   // are kept in dev only when their namespace matches VITE_DEBUG_GROUPS
   // (.env, comma-separated, supports trailing-* wildcards). loadEnv reads
@@ -194,6 +199,23 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 8081,
+      // Same-origin proxy for local dev.
+      //
+      // `.env` ships `VITE_OPENOBSERVE_ENDPOINT=/`, so the UI calls `/api`,
+      // `/auth` and `/config` on its OWN origin. Without a proxy those hit the
+      // dev server, which has no such routes, and every request 404s — login
+      // included, which reads as a broken build rather than missing config.
+      //
+      // Proxying also sidesteps CORS: the backend's allowlist is `ZO_WEB_URL`
+      // plus `ZO_CORS_ALLOWED_ORIGINS`, and a dev server on another port is in
+      // neither by default. Same-origin means there is nothing to allow.
+      //
+      // Override the target with O2_DEV_BACKEND when the backend is not local.
+      proxy: {
+        "/api": { target: devBackend, changeOrigin: true },
+        "/auth": { target: devBackend, changeOrigin: true },
+        "/config": { target: devBackend, changeOrigin: true },
+      },
       // headers: {
       //   "Content-Security-Policy":
       //     "default-src 'self'; connect-src 'self' http://localhost:5080;  script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:;img-src 'self' data:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; block-all-mixed-content;",
