@@ -11086,7 +11086,7 @@
         "screenshot": "Screenshot"
       },
       "clickTypeLabel": "Click type",
-      "clickTypeHelp": "Left click is a plain click. Right click opens a context menu, and double click sends two clicks.",
+      "clickTypeHelp": "Right click opens a context menu; double click sends two clicks.",
       "clickTypes": {
         "left": "Left click",
         "right": "Right click",
