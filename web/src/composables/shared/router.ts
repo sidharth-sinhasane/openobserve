@@ -50,6 +50,7 @@ import DbmShell from "@/views/DatabaseMonitoring/DbmShell.vue";
 
 const DbmDatabasesPage = () => import("@/views/DatabaseMonitoring/DatabasesPage.vue");
 const DbmQueriesPage = () => import("@/views/DatabaseMonitoring/QueriesPage.vue");
+const DbmSamplesPage = () => import("@/views/DatabaseMonitoring/SamplesPage.vue");
 const DbmQueryDetailPage = () => import("@/views/DatabaseMonitoring/QueryDetailPage.vue");
 const DbmActivityPage = () => import("@/views/DatabaseMonitoring/ActivityPage.vue");
 const DbmDeadlocksPage = () => import("@/views/DatabaseMonitoring/DeadlocksPage.vue");
@@ -389,6 +390,15 @@ const useRoutes = () => {
           path: "queries",
           name: "dbmQueries",
           component: DbmQueriesPage,
+          meta: {
+            keepAlive: true,
+            title: "Databases",
+          },
+        },
+        {
+          path: "samples",
+          name: "dbmSamples",
+          component: DbmSamplesPage,
           meta: {
             keepAlive: true,
             title: "Databases",
