@@ -1,0 +1,30 @@
+{
+  "feature_slug": "synthetics-click-types",
+  "feature_title": "Synthetics Browser Test Click Types & Hover Action",
+  "area": "Synthetics",
+  "edition": "oss",
+  "needs_e2e": true,
+  "needs_api": true,
+  "spec_filename": "clickTypes.spec.js",
+  "spec_path": "tests/ui-testing/playwright-tests/Synthetics/clickTypes.spec.js",
+  "playwright_group": "Synthetics",
+  "source_files": [
+    "web/src/views/synthetics/CreateBrowserTest.vue",
+    "web/src/components/synthetics/journey/BrowserJourneyStepEditor.vue",
+    "web/src/components/synthetics/journey/BrowserJourney.vue",
+    "web/src/components/synthetics/journey/JourneySteps.vue",
+    "web/src/constants/synthetics.ts",
+    "src/config/src/meta/synthetics.rs"
+  ],
+  "existing_tests_in_diff": false,
+  "skip": false,
+  "skip_reason": "",
+  "rationale": {
+    "edition": "All 23 changed files sit in OSS-owned paths: src/config/src/meta/synthetics.rs and web/src/** (views/synthetics, components/synthetics, composables, constants, types, utils/synthetics, locales). None touch enterprise/, o2_enterprise/ or any enterprise-gated module, and no enterprise-only keywords (SSO/SAML/RBAC/SDR/cipher/logo) appear in the changed paths or symbol names. Classified oss.",
+    "skip": "No skip markers: the trigger comment is empty and no tests-added label was passed. The diff adds and alters user-facing UI in web/src — a new click-type selector, the hover action, a record-before-step row action, restore/prefix-failure banners, a recording marker and new lock states — so the 'no user-facing change' skip does not apply. Not skipped.",
+    "e2e": "The manual browser-test journey editor is user-facing and reachable without the extension: a user can add a step, pick the new hover action, choose left/middle/right/double click on a click step, and save — and the save gate now validates button/click_count. E2E is warranted to verify the new control, the new action and the validation/error behavior.",
+    "area": "Every UI change lives under web/src/views/synthetics/ and web/src/components/synthetics/, so Synthetics is the natural product area. There is no existing tests/ui-testing/playwright-tests/Synthetics folder and no Synthetics testfolder in the ci-matrix manifests, so this is a new area.",
+    "group": "No Synthetics testfolder exists in ci_matrix_cloud.json, ci_matrix_env.json or ci_matrix.ent.json, so there is no closest existing shard to join. playwright_group is set to a new 'Synthetics' group; the Engineer must create this shard in the matrix manifests.",
+    "existing_tests": "The diff adds/modifies many web/src/**/*.spec.ts files (CreateBrowserTest.schema.spec.ts, BrowserJourney.spec.ts, useSyntheticsRecorder.spec.ts, etc.), but those are Vitest unit specs, not Playwright E2E specs under tests/ui-testing/playwright-tests/. No E2E specs in the diff, so existing_tests_in_diff is false and the Architect must author coverage from scratch."
+  }
+}

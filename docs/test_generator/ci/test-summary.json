@@ -1,0 +1,42 @@
+[
+  {
+    "title": "P0: Set a non-default click type on a click step updates the row label to \"Right click\"",
+    "action": "new",
+    "verifies": "the click-type picker appears on a fresh click step and selecting right updates the row label badge to \"Right click\""
+  },
+  {
+    "title": "P0: Convert a click step to a hover step hides the click-type picker and shows the locator block without a value input",
+    "action": "new",
+    "verifies": "choosing hover hides the click-type picker, renders the locator block, and shows no value input"
+  },
+  {
+    "title": "P1: Each click type maps to its correct row label (double, middle, left)",
+    "action": "new",
+    "verifies": "double/middle update the row label to \"Double click\"/\"Middle click\" and left returns the badge to plain \"Click\""
+  },
+  {
+    "title": "P1: The action picker offers hover and omits retired actions",
+    "action": "new",
+    "verifies": "the action picker lists hover and filters out scroll/wait/screenshot"
+  },
+  {
+    "title": "P1: Leaving click clears click metadata so returning to click shows a plain \"Click\"",
+    "action": "new",
+    "verifies": "switching away from click discards button/click_count so returning shows the default \"Click\" label"
+  },
+  {
+    "title": "P1: A journey with a right-click and a hover step saves successfully",
+    "action": "new",
+    "verifies": "a journey containing button:right and a hover action passes save validation and persists"
+  },
+  {
+    "title": "P2: A hover step without a locator blocks the journey with a locator-required error",
+    "action": "new",
+    "verifies": "a hover step missing a locator candidate is rejected at the journey step with the locator-required error"
+  },
+  {
+    "title": "P2: A hand-added step action change shows no discard notice",
+    "action": "new",
+    "verifies": "changing a hand-added step's action does not render the recorded-payload-discarded notice"
+  }
+]
