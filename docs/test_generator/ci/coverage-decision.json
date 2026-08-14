@@ -1,8 +1,0 @@
-{
-  "action": "new",
-  "target_spec": "tests/ui-testing/playwright-tests/Synthetics/clickTypes.spec.js",
-  "existing_tests_considered": [],
-  "needs_registration": true,
-  "registration_note": "No playwright.yml exists in this repo; spec registration lives in tests/ui-testing/ci-matrix/ci_matrix.json. Add a new shard entry: { \"testfolder\": \"Synthetics\", \"actual_folder\": \"Synthetics\", \"browser\": \"chrome\", \"run_files\": [\"clickTypes.spec.js\"], \"disabled\": [] }. New page object must also be wired into pages/page-manager.js.",
-  "rationale": "grep for 'synthetics|clickTypes|click-type' across tests/ui-testing/ returns zero hits and there is no tests/ui-testing/playwright-tests/Synthetics/ folder, so this is a greenfield feature with no existing spec to extend or append to. The Synthetics browser-journey click-type/hover editor is its own area and warrants a dedicated spec (spec_path from run-context) plus a new page object. No existing page object (pm.*) covers the synthetics create/journey editor."
-}

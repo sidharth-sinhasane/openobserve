@@ -34,7 +34,11 @@ export class CreateBrowserTestPage {
         this.locatorBlock = '[data-test="synthetics-journey-step-locator"]';
         this.locatorOverrideInput = '[data-test="synthetics-journey-step-locator-override-input-field"]';
         this.locatorAddBtn = '[data-test="synthetics-journey-step-locator-add"]';
-        this.locatorError = '[data-test="synthetics-journey-step-locator-error"]';
+        // The save-time "this step names no element" error (`selector-error-message`
+        // → BrowserJourneyLocator `errorMessage` prop) renders as the locator OInput's
+        // inline error span, not as `synthetics-journey-step-locator-error` (that `<p>`
+        // only fires for delete-last / duplicate-append). Target the OInput error.
+        this.locatorError = '[data-test="synthetics-journey-step-locator-override-input-error"]';
         this.actionChangedNotice = '[data-test="synthetics-journey-step-action-changed-notice"]';
 
         // ── Configure phase ─────────────────────────────────────────────────────

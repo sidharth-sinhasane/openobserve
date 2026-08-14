@@ -1,6 +1,0 @@
-{
-  "group": "Synthetics",
-  "spec_filename": "clickTypes.spec.js",
-  "create_group": true,
-  "browser": "chrome"
-}
